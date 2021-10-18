@@ -83,3 +83,82 @@ WHERE ride_length <= '00:00:00'
 DELETE
 FROM sep2020_trips
 WHERE start_station_name IS NULL OR end_station_name IS NULL
+
+/* Finding count for overall, members, and casual riders on Rider Share Slides (Steps repeated for all seasons. Percentages were calculated 
+by pie chart tool in Tableau) */
+
+SELECT COUNT(1)
+FROM annual_trips
+
+SELECT COUNT(1)
+FROM annual_trips
+WHERE member_casual = 'member'
+
+SELECT COUNT(1)
+FROM annual_trips
+WHERE member_casual = 'casual'
+
+/* Finding bike counts for overall, members, and casual riders on Bike Type Slides (Steps repeated for all seasons. Percentages were calculated 
+by pie chart tool in Tableau) */
+
+SELECT COUNT(1)
+FROM annual_trips
+WHERE rideable_type = 'classic_bike'
+
+SELECT COUNT(1)
+FROM annual_trips
+WHERE rideable_type = 'electric_bike'
+
+SELECT COUNT(1)
+FROM annual_trips
+WHERE rideable_type = 'docked_bike'
+
+/* Finding ride counts for overall, members, and casual riders on Ride Count Slides, both over the entire year and by day of week */
+
+SELECT COUNT(1), day_of_week
+FROM annual_trips
+GROUP BY day_of_week
+
+SELECT COUNT(1), day_of_week, member_casual
+FROM annual_trips
+GROUP BY day_of_week, member_casual
+
+/* Finding average ride lengths for overall, members, and casual riders on Ride Length Slides, both over the entire year and by day of 
+week (Steps repeated for all seasons) */
+
+SELECT AVG(ride_length)
+FROM annual_trips
+
+SELECT AVG(ride_length), member_casual
+FROM annual_trips
+GROUP BY member_casual
+
+SELECT AVG(ride_length)
+FROM fall2020_trips
+
+SELECT AVG(ride_length), day_of_week
+FROM annual_trips
+GROUP BY day_of_week
+
+SELECT AVG(ride_length), day_of_week, member_casual
+FROM annual_trips
+GROUP BY day_of_week, member_casual
+
+/* Finding top 5 routes overall, for members, and for casual riders on Top 5 Routes Slides */
+
+SELECT COUNT(1), start_station_name, end_station_name
+FROM annual_trips
+GROUP BY start_station_name, end_station_name
+ORDER BY COUNT DESC
+
+SELECT COUNT(1), start_station_name, end_station_name
+FROM annual_trips
+WHERE member_casual = 'member'
+GROUP BY start_station_name, end_station_name
+ORDER BY COUNT DESC
+
+SELECT COUNT(1), start_station_name, end_station_name
+FROM annual_trips
+WHERE member_casual = 'casual'
+GROUP BY start_station_name, end_station_name
+ORDER BY COUNT DESC
