@@ -1,0 +1,85 @@
+/* This is the SQL script for some of the major steps taken in organizing and analyzing the datasets for the Cyclistic Case Study 
+completed as part of the Google Data Analytics Certificate. */
+
+/* Importing Excel tables into Postgres and naming them (process was repeated for all 12 months) */
+
+CREATE TABLE sep2020_trips (ride_id VARCHAR, rideable_type VARCHAR, started_at TIMESTAMP, 
+							ended_at TIMESTAMP, start_station_name VARCHAR, 
+							start_station_id VARCHAR, end_station_name VARCHAR, 
+							end_station_name VARCHAR, start_lat NUMERIC, start_lng NUMERIC,
+						  end_lat NUMERIC, end_lng NUMERIC, member_casual VARCHAR, 
+							day_of_week INTEGER)
+              
+COPY sep2020_trips
+FROM '/Users/kevinwlarkin/Desktop/Computer Skills Learning/Google Data Analytics/Course 8 _ Capstone/Cyclistic Case Study/sep_2020trips.csv'
+DELIMITER ',' CSV HEADER
+
+/* Adding column for 'ride_length' (process was releated for all 12 months)
+
+ALTER TABLE sep2020_trips
+ADD ride_length INTERVAL
+
+UPDATE sep2020_trips
+SET ride_length = (ended_at - started_at)
+
+/* Creating table joining all tables to analyze all 12 months */
+
+CREATE TABLE annual_trips AS
+(SELECT *
+FROM sep2020_trips
+UNION
+SELECT *
+FROM oct2020_trips
+UNION
+SELECT *
+FROM nov2020_trips
+UNION
+SELECT *
+FROM dec2020_trips
+UNION
+SELECT *
+FROM jan2021_trips
+UNION
+SELECT *
+FROM feb2021_trips
+UNION
+SELECT *
+FROM mar2021_trips
+UNION
+SELECT *
+FROM apr2021_trips
+UNION
+SELECT *
+FROM may2021_trips
+UNION
+SELECT *
+FROM jun2021_trips
+UNION
+SELECT *
+FROM jul2021_trips
+UNION
+SELECT *
+FROM aug2021_trips)
+
+/* Creating tables for seasons (process was repeated for other 3 seasons) */
+
+CREATE TABLE fall2020_trips AS
+(SELECT *
+FROM sep2020_trips
+UNION
+SELECT *
+FROM oct2020_trips
+UNION
+SELECT *
+FROM nov2020_trips)
+
+/* Removing all instances where 'ride_length' was negative or equivalent to '00:00:00' (process was repeated for all 12 months) */
+
+DELETE
+FROM sep2020_trips
+WHERE ride_length <= '00:00:00'
+
+/* Removing all instances with no start or end station names are null */
+DELETE
+FROM sep2020_trips
+WHERE start_station_name IS NULL OR end_station_name IS NULL
