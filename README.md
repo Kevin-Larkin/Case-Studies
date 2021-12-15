@@ -49,6 +49,6 @@ Steps 5 and 6: Share and Act
 
 
 Top 3 recommendations based on analysis:
-1: Increase advertising efforts in warmer seasons and at stations casual riders use most often, such as Streeter Dr & Grand Ave, Lake Shore Dr & Monroe St, and Millennium Park.
-2: Target casual riders that use bikes in similar ways to members, such as casual riders who ride on weekdays.
-3: Provide rewards and incentives for becoming a member the more you ride, since casual riders ride for much longer durations.
+*  Increase advertising efforts in warmer seasons and at stations casual riders use most often, such as Streeter Dr & Grand Ave, Lake Shore Dr & Monroe St, and Millennium Park.
+*  Target casual riders that use bikes in similar ways to members, such as casual riders who ride on weekdays.
+*  Provide rewards and incentives for becoming a member the more you ride, since casual riders ride for much longer durations.
